@@ -1,0 +1,45 @@
+---
+title: "Shootings in 2018"
+author: "Priyanshi Rastogi"
+date: "5/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = TRUE)
+source("analysis.R")
+```
+##Summary Information:
+The given dataset talks about the shootings in 2018 with the address, city, state, number of people killed, injured,
+date, longitude and latitude. The number of shootings occured was `r shootings_occurred`. The number of lives lost was 
+`r lives_lost`. The city with the most impact was `r city_with_most_impact`, with most impact meaning the city with the most number of lives lost since number of lives lost should be weighed higher than the number of injuries in this case. The city with the most number of injuries was `r most_injured_city` and the city with the highest number of people killed and injured combined was `r most_hurt_city`.
+
+##Summary Table:
+I created a summary table using the total number of killings that occurred in each state. First I grouped the total
+number of killings by state, took the sum of the killings for each state, and looked at the top 10 states. From the created summary table we can see that the top 3 states with the highest killings were California, Florida, and Pennsylvania respectively.
+California had the highest total number of killings (`r most_num_killed`).
+```{r summary_df, echo = F}
+kable(states_with_killings)
+```
+
+##Description of a Particular Incident:
+I chose to focus on the shooting with the most number of people killed which occured in `r location_with_most_killings`, `r state_with_most_killings`. There were `r num_impacted` people impacted, with `r most_num_killed`people that were killed and
+`r most_num_injured` people that were injured.From http://time.com/parkland-high-school-shooting-vigil/, it shows how heavily
+all of America was affected when it occurred on Valentine's Day. Such incidents captured Lori Alhaddef, mother of Alyssa, 14,
+pleading with President Trump on CNN to “please, do something.” It also shows how every place needs to be protected and secured
+given that Parkland was one of the "safest towns in America".
+
+##Interactive Map:
+The purpose of making this interactive map is to easily see the location of the shootings and compare the sizes of the circles based on the most impacted shooting.
+```{r interactiveMap, echo = FALSE}
+interactive_map
+```
+From this interactive map we can make two clear observations. The first being that most of the shootings occur towards the East Coast of the United States and very few towards the West Coast and very little to none in the Mid Coast (esp up North). We can also see that, based on the size of the circles, the most impacted shootings (with the most number kill and number injured combined) was also towards the East Coast especially in the South East side of the U.S.
+
+## Plot of choice:
+The question I wanted to answer from the given data was in which month did the most number of killings occur. I chose to filter down the data to just the months of the year and the total number of killings that occurred in each month and plotted it as a bar graph since it is easiest to see which month had the highest number of killings that way.
+```{r months vs. killings, echo = FALSE}
+months_vs_killing_plot
+```
+
+The bar graph revealed that the month with the highest number of killings was November with February and July coming in as the second and third highest month (although relatively close in the number of killings).

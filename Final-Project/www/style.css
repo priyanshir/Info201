@@ -1,0 +1,18 @@
+body {
+  font-family: verdana;
+  text-align: justify;
+  background-color: rgb(237, 243, 244);
+}
+
+h3 {
+  font-family: verdana;
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.75;
+  
+}

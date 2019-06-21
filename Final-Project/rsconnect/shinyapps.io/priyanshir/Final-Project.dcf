@@ -1,0 +1,13 @@
+name: Final-Project
+title: Final-Project
+username:
+account: priyanshir
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 966635
+bundleId: 2133496
+url: https://priyanshir.shinyapps.io/Final-Project/
+when: 1559760104.38768
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: agg-table.R|charts_dataset.R|dsm_chart.R|Education_chart.R|employment_chart.R|ex.r|index.Rmd|LICENSE|mental_health.jpg|README.md|summary_info_list.R|rubrics/brainstorm-deliverable.md|rubrics/final-deliverable.md|rubrics/midpoint-deliverable.md

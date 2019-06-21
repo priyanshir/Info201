@@ -1,0 +1,70 @@
+---
+title: "Final Project Midpoint"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+library(knitr)
+library(dplyr)
+library(ggplot2)
+our_data <- read.csv("data/tech-survey.csv") #loading in our data frame
+source("education_chart.R")
+source("employment_chart.R")
+source("dsm_chart.R")
+source("summary_info_list.R")
+source("agg-table.R")
+```
+##Introduction:
+As discussed in our first deliverable - our group is focusing on Mental Health. We are interested in Mental Health because it is a topic that interests us both academically and personally. Mental health can affect anyone at some point in their life - people can become mentally ill, get diagnosed with a mental health disorder, or know someone (family, friend, colleague) who is challenged by mental health. After reviewing our datasets this week, we are still interested in examining prevalence (of certain mental health disorders), gender, education level, and employment type all related to geographic location. Within employmet type specifically, we are also going to focus on a smaller subset of tech workers. We used three different datasets to complete our work this week - see descriptions below.
+
+###About the Mental Health in Tech Survey Dataset:
+This data was collected from a 2014 survey conducted by “Open Sourcing Mental Illness”, a non-profit corporation dedicated to raising awareness, educating, and providing resources to support mental wellness in the tech and open source communities. The survey explored the perspective of people in the tech industry towards their own mental health, the culture and attitudes surrounding mental health, and the prevalence of mental health disorders.
+
+###About the Mental Health Admissions and Discharges dataset:
+The National Mental Health Services Survey (N-MHSS) is an annual survey. It is designed to collect statistical information on the services and features of all known mental health treatment facilities in the United States. This includes the 50 states, the District of Columbia, and all U.S. territories. Every other year, starting in 2014, N-MHSS also collects information on the numbers and demographics of persons served in these treatment centers. N-MHSS complements the information gathered through the National Survey of Substance AbuseTreatment Services (N-SSATS). N-SSATS is SAMHSA’s survey of substance abuse treatment facilities. We combined the two datasets (admissions and discharges) by the caseIDs and used that as our resulting dataset. We then created a smaller dataset from that for use with the charts below to speed up processing time.
+
+##Summary Information List:
+```{r summary_info_list, echo = FALSE}
+get_summary_info(our_data)
+```
+This summary information function takes a look at the tech survey and uses that as a dataset to answer various different questions. As you can see from the list we were able to make six different observations from the given data. We found out that the most common repsonse to if the person (being interviewed) would bring up a mental health issue with a potential employer in an interview was no and that the percentage of people who have an employer that provides mental health benefits was approx. 37.89% and that most people did not know of any options for mental health care provided by their employer. Only 35.27% of the people interviewed knew what care options were available to them. Furthermore, only 17.87% of the people interviewed felt comfortable talking to their coworkers at work about their problems (and being taken seriously) and about 40.98% of people felt comfortable talking to their supervisors about their mental health.
+
+##Aggregate Table:
+The following table shows the top 10 states in the United States of America where people who work in the tech industry have actually sought treatment for a mental health condition.
+
+```{r top_10_treatment_states, echo = FALSE}
+kable(top_10_treatment_states(our_data))
+```
+
+The aggregate table takes a close look into the tech survey and uses its dataset to answer various questions. The above table shows data that is grouped by each state and the table itself is sorted from the highest number of people to the lowest. As you can see from the table, the state of Washington had the highest number of people who have sought treatment for a mental health condition at least once in their lives. The second highest being the state of California. On the other hand, at the bottom of the table are the states Massachusetts, Maryland, and Minnesota which had one of the lowest number of people who have sought treatment before.
+
+##Charts
+The next 3 charts are all based on the admissions and discharges dataset from the National Mental Health Services Survey (N-MHSS) outlined above.
+
+###Chart 1:
+###Education
+This chart explores the relationship between people seeking mental health care and their education level. The data is from the 2017 National Mental Health Services Survey which includes information on all known mental helath treatment facilities, both public and private, in all of the US that provide mental health treatment services to people with mental illness. As depicted in this lollipop chart which effectively highlights the different sizes of each education level, the largest group by far is those with 12 years of school (or a GED) representing people who have completed high school but have not had any higher education. This relates to further questions of job oppurtunities and income level that often are highly correlated with education level and may include signifiacnt factors of stress or instability that can contribute to mental health.
+
+```{r Education_chart, echo=FALSE}
+plot(education_chart)
+```
+
+###Chart 2:
+###Employment Levels by Gender
+This chart examines the relationship between gender and employment levels for people admitted for mental health care. There are two categories of employment pulled from "Unknown" values that we felt were important to include (not filter out as NA values) to give a more accurate reflection of the number of people seeking care. The first "Unknown" category reflects people whose work status is unknown or unreported, their status could be employed Full-time or Part-time, Unemployed, or not in the labor force - in which case they fall into the categories outlined in the following sentence. The second category of "Not in Labor Force - Other" are persons who are known not to be working but are NOT unemployed, instead they may fall into the categories of Student, Retired/Disabled, Resident of an institution, or Homemaker but the data was not reported at the time of admittance. After building the chart you see below, it is clear that the largest group of people being admitted for mental health treatment are Unemployed persons with an almost 2/3 majority of Men. 
+
+```{r employment_chart, echo=FALSE}
+plot(employment_chart)
+```
+
+###Chart 3:
+###DSM Diagnoses and Criteria
+This chart illustrates the prevalence of different mental health issues and diagnoses for people who sought treatment in 2017. It can be used to answer various questions about the treatment for various disorders and mental health issues. The data shows that most of the people that were admitted into treatment facilities had drug, alcohol, and other substance-related issues (abuse, intoxication, dependence). Of the alcohol and substance-realted disorders/problems, opioid use is what most people are admitted into treatment for. Of the more typical disorders classified in the DSM, depressive disorders are treated the most. These insights lead to further inquiries about external factors that may affect pursuit or need for treatment and their diagnosis.
+
+```{r dsm_chart, echo=FALSE}
+plot(dsm_chart)
+```
